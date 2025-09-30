@@ -1,15 +1,17 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps {
   variant?: "primary" | "secondary" | "outline" | "ghost"
   size?: "sm" | "md" | "lg"
   href?: string
+  children: React.ReactNode
+  className?: string
+  onClick?: () => void
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", href, children, ...props }, ref) => {
+const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
+  ({ className, variant = "primary", size = "md", href, children, onClick, ...props }) => {
     const baseStyles = "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"
 
     const variants = {
@@ -25,16 +27,28 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       lg: "px-8 py-4 text-lg"
     }
 
-    const Component = href ? "a" : "button"
-    const componentProps = href ? { href, ...props } : { ...props, ref }
+    const classes = cn(baseStyles, variants[variant], sizes[size], className)
+
+    if (href) {
+      return (
+        <a
+          href={href}
+          className={classes}
+          {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+        >
+          {children}
+        </a>
+      )
+    }
 
     return (
-      <Component
-        className={cn(baseStyles, variants[variant], sizes[size], className)}
-        {...componentProps}
+      <button
+        className={classes}
+        onClick={onClick}
+        {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
       >
         {children}
-      </Component>
+      </button>
     )
   }
 )
