@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import { ArrowRight, PlayCircle, Star, Users, TrendingUp } from 'lucide-react'
 
 export function Hero() {

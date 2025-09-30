@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/Card'
 import { Star } from 'lucide-react'
-import Image from 'next/image'
 
 export function Testimonials() {
   const testimonials = [
@@ -118,7 +117,7 @@ export function Testimonials() {
 
                   {/* Quote */}
                   <blockquote className="text-slate-700 mb-6 italic leading-relaxed">
-                    "{testimonial.quote}"
+                    &ldquo;{testimonial.quote}&rdquo;
                   </blockquote>
 
                   {/* Author */}

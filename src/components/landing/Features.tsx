@@ -15,8 +15,7 @@ import {
   TrendingUp,
   Palette,
   Download,
-  MessageSquare,
-  Star
+  MessageSquare
 } from 'lucide-react'
 
 export function Features() {
